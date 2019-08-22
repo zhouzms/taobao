@@ -1,10 +1,12 @@
-package zms.servlet.web;
+package zms.servlet;
 
 import com.alibaba.fastjson.JSONObject;
 import zms.daoImpl.LoginDaoImpl;
 import zms.pojo.User;
 import zms.util.AJaxResult;
 import zms.util.Encoding;
+import zms.util.RandomWord;
+import zms.util.email.GetJavaMail;
 import zms.util.message.GetCode;
 
 import javax.servlet.ServletException;
@@ -16,34 +18,36 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@WebServlet("/web/getcode")
-public class getcode extends HttpServlet {
+/**
+ * @author 19448
+ */
+@WebServlet("/web/getemailcode")
+public class GetEmailcode extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //设置编码
         Encoding.setEncoding(request,response);
         //接收参数
-        String phonenum=request.getParameter("phonenum");
+        String emailenum=request.getParameter("emailenum");
         AJaxResult aJaxResult=new AJaxResult();
         LoginDaoImpl<User> Dao=new LoginDaoImpl<>();
-        //检查手机号是否已经注册
-        //查看手机号是否注册
-        String s="select * from login where phone_l=?";
-        ResultSet query = Dao.query(s, phonenum);
+        //检查邮箱号是否注册
+        String sql="select * from login where email_l =?";
+        ResultSet query = Dao.query(sql, emailenum);
         try {
             if(query.next()==true){
-                //手机号有被注册
+                //邮箱号有被注册
                 aJaxResult.setFlag(false);
-                aJaxResult.setMsg("手机号已经被注册");
+                aJaxResult.setMsg("邮箱号已经被注册");
             }else {
-                //没有注册在发送短信
-                Boolean send = GetCode.isSend(phonenum);
+                //没有注册在发送邮箱验证
+                Boolean send = GetJavaMail.sendEmail(emailenum);
                 if(send){
                     aJaxResult.setFlag(true);
-                    aJaxResult.setMsg("验证码发送成功");
+                    aJaxResult.setMsg("邮箱验证码发送成功");
                 }else{
                     aJaxResult.setFlag(false);
-                    aJaxResult.setMsg("验证码发送失败");
+                    aJaxResult.setMsg("邮箱验证码发送失败");
                 }
             }
         } catch (SQLException e) {
@@ -56,6 +60,6 @@ public class getcode extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request,response);
+            doPost(request,response);
     }
 }

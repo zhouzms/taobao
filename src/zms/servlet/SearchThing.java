@@ -1,4 +1,4 @@
-package zms.servlet.web;
+package zms.servlet;
 
 import zms.util.Encoding;
 
