@@ -11,7 +11,7 @@ $(function(){
 });
 
 </script>
-<c:forEach items="${cs}" var="c">
+<c:forEach items="${category}" var="c">
 	<div cid="${c.id}" class="productsAsideCategorys">
 	 
 		<c:forEach items="${c.productsByRow}" var="ps">
@@ -30,6 +30,6 @@ $(function(){
 				<div class="seperator"></div>
 			</div>		
 		</c:forEach>
-	</div>			
+	</div>
 </c:forEach>
 	

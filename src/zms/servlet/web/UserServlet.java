@@ -1,4 +1,4 @@
-package zms.servlet;
+package zms.servlet.web;
 
 
 import zms.pojo.User;

@@ -69,34 +69,31 @@ $(function(){
 		<span style="margin-left:10px" >商品分类</span>
 		
 	</div>
-	
+	<!--导航栏上面的文字-->
 	<div class="rightMenu">
 		<span><a href=""><img src="<%=request.getContextPath()%>/img/site/chaoshi.png"/></a></span>
 		<span><a href=""><img src="<%=request.getContextPath()%>/img/site/guoji.png"/></a></span>
-
-		<c:forEach items="${cs}" var="c" varStatus="st">
-			<c:if test="${st.count<=4}">
+		<c:forEach items="${category}" var="c" begin="1" end="4">
 				<span>
-				<a href="forecategory?cid=${c.id}">
+				<a href="#">
 					${c.name}
-				</a></span>			
-			</c:if>
+				</a></span>
 		</c:forEach>
 	</div>
 	
 </div>
 
-	
+	<!--链接栏 （平板电脑）-->
 <div style="position: relative">
 	<%@include file="categoryMenu.jsp" %>
 </div>
-
+<!--旁边属性-->
 <div style="position: relative;left: 0;top: 0;">
 	<%@include file="productsAsideCategorys.jsp" %>
 </div>
 
 
-
+<!--图片轮播-->
 <%@include file="carousel.jsp" %>
 
 <div class="carouselBackgroundDiv">

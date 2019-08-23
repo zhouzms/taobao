@@ -1,4 +1,4 @@
-package zms.servlet;
+package zms.servlet.web;
 
 import zms.serviceImpl.UserServiceImpl;
 import zms.util.AJaxResult;
@@ -33,7 +33,8 @@ public class UserServletQQRegister extends HttpServlet {
         AJaxResult getajax = userService.getajax();//返回结果
         if(flag){
             //注册成功
-            response.sendRedirect("../login.jsp");
+            String contextPath = request.getContextPath()+"/include/registerSuccessPage.jsp";
+            response.sendRedirect(contextPath);
         }else {
             request.setAttribute("msg",getajax);
             request.getRequestDispatcher("/register.jsp").forward(request,response);
