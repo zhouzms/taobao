@@ -9,7 +9,7 @@
 <c:if test="${!empty param.categorycount}">
 	<c:set var="categorycount" scope="page" value="${param.categorycount}"/>
 </c:if>
-
+<!--这个是产品列表-->
 <div class="homepageCategoryProducts">
 	<c:forEach items="${cs}" var="c" varStatus="stc">
 		<c:if test="${stc.count<=categorycount}">
