@@ -89,7 +89,7 @@ $(function(){
 </div>
 <!--旁边属性-->
 <div style="position: relative;left: 0;top: 0;">
-	<%@include file="productsAsideCategorys.jsp" %>
+	<%--<%@include file="productsAsideCategorys.jsp" %>--%>
 </div>
 
 

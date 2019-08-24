@@ -1,8 +1,9 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 
-<c:if test="${empty param.categorycount}">
+<c:if test="${empty categorycount}">
 	<c:set var="categorycount" scope="page" value="100"/>
 </c:if>
 
@@ -11,16 +12,16 @@
 </c:if>
 <!--这个是产品列表-->
 <div class="homepageCategoryProducts">
-	<c:forEach items="${cs}" var="c" varStatus="stc">
-		<c:if test="${stc.count<=categorycount}">
+	<c:forEach items="${categoriesArrayList}" var="c" varStatus="stc">
+		<c:if test="${stc.count<=categorycout}">
 			<div class="eachHomepageCategoryProducts">
 				<div class="left-mark"></div>
 				<span class="categoryTitle">${c.name}</span>
 				<br>
-				<c:forEach items="${c.products}" var="p" varStatus="st">
+				<c:forEach items="${c.arrproduct}" var="p" varStatus="st">
 					<c:if test="${st.count<=5}">
 						<div class="productItem" >
-							<a href="foreproduct?pid=${p.id}"><img width="100px" src="img/productSingle_middle/${p.firstProductImage.id}.jpg"></a>
+							<a href="foreproduct?pid=${p.id}"><img width="100px" ></a>
 							<a class="productItemDescLink" href="foreproduct?pid=${p.id}">
 								<span class="productItemDesc">[热销]
 								${fn:substring(p.name, 0, 20)}

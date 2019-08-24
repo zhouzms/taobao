@@ -11,10 +11,10 @@ $(function(){
 });
 
 </script>
-<c:forEach items="${category}" var="c">
+<c:forEach items="${categoriesArrayList}" var="c">
 	<div cid="${c.id}" class="productsAsideCategorys">
-	 
-		<c:forEach items="${c.productsByRow}" var="ps">
+
+		<c:forEach items="${c.arrproduct}" var="ps">
 			<div class="row show1">
 				<c:forEach items="${ps}" var="p">
 					<c:if test="${!empty p.subTitle}">
@@ -28,8 +28,8 @@ $(function(){
 					</c:if>
 				</c:forEach>
 				<div class="seperator"></div>
-			</div>		
+			</div>
 		</c:forEach>
 	</div>
 </c:forEach>
-	
+

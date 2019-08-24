@@ -33,13 +33,13 @@ public class GetProduct extends HttpServlet {
         CategoryService categoryService=new CategoryServiceImpl();
         List<Category> category = categoryService.getCategory();
         List<Category> categoriesArrayList=new ArrayList<>();
-        Category arrproduct=new Category();
         /**
          * 获取某一类的商品
          */
         ProductService productService=new ProductServiceImpl();
         for(Category cg:category){
             List<Product> pros = productService.pros(cg.getId());
+            Category arrproduct=new Category();
             arrproduct.setArrproduct(pros);
             arrproduct.setId(cg.getId());
             arrproduct.setName(cg.getName());

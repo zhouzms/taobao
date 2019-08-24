@@ -6,7 +6,7 @@
 <div class="homepageDiv">
 	<!--上面的导航-->
 	<%@include file="categoryAndcarousel.jsp"%>
-	<!--商品分类中的产品表-->
+	<!--商品分类中的产品表--><!--图片不可以显示-->
 	<%@include file="homepageCategoryProducts.jsp"%>	
 </div>
 
