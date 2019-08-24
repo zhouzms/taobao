@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8" isELIgnored="false"%>
 
 <nav class="top">
-		<a href="home.jsp">
+		<a href="<%=request.getContextPath()%>/home.jsp">
 			<span  style="color: red;" class=" glyphicon glyphicon-home "></span>
 			天猫首页
 		</a>	

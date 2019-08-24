@@ -1,5 +1,7 @@
 package zms.pojo;
 
+import java.util.List;
+
 /**
  * @author 19448
  */
@@ -36,6 +38,30 @@ public class Product {
      * 产品创建时间
      */
     private String createDate;
+    /**
+     * 一个产品有多张图片
+     */
+    private List<ProductImage> images;
+    /**
+     * 一个产品对应多个评论
+     */
+    private List<Review> reviews;
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public List<ProductImage> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ProductImage> images) {
+        this.images = images;
+    }
 
     public int getId() {
         return id;

@@ -11,12 +11,12 @@
 			$("#time").text(num+" "+"s");
 		}else {
 			clearInterval(interval);
-			window.location.href="/login.jsp";
+			window.location.href="<%=request.getContextPath()%>/login.jsp";
 		}
 		num--;
 	}
 </script>
-<div style="margin-top: 200px;margin-left:400px;width: 500px;height: 200px;text-align: center;">
+<div style="margin-top: 200px;margin-left:400px;width: 550px;height: 200px;text-align: center;">
 	<div class="registerSuccessDiv">
 		<img src="<%=request.getContextPath()%>/img/site/registerSuccess.png">
 			恭喜注册成功

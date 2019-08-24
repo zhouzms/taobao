@@ -1,11 +1,40 @@
 package zms.pojo;
 
+import java.util.List;
+
 public class User {
-    private int id_l;//用户id
-    private String username_l;//用户帐号
-    private String password_l;//用户密码
-    private String phone_l;//用户手机号
-    private String email_l;//用户邮箱
+    /**
+     * 用户id
+     */
+    private int id_l;
+    /**
+     * 用户帐号
+     */
+    private String username_l;
+    /**
+     * 用户密码
+     */
+    private String password_l;
+    /**
+     * 用户手机号
+     */
+    private String phone_l;
+    /**
+     * 用户邮箱
+     */
+    private String email_l;
+    /**
+     * 用户所有评论
+     */
+    private List<Review> reviews;
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
 
     public int getId_l() {
         return id_l;

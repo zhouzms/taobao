@@ -1,7 +1,3 @@
-<!-- 模仿天猫整站j2ee 教程 为how2j.cn 版权所有-->
-<!-- 本教程仅用于学习使用，切勿用于非法用途，由此引起一切后果与本站无关-->
-<!-- 供购买者学习，请勿私自传播，否则自行承担相关法律责任-->
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 
@@ -10,25 +6,25 @@
 		<img id="simpleLogo" class="simpleLogo" src="<%=request.getContextPath()%>/img/site/simpleLogo.png">
 	</a>
 
-	<form action="web/searchThing" method="post" >
-	<div class="simpleSearchDiv pull-right">
-		<input type="text" placeholder="平衡车 原汁机"  value="${param.keyword}" name="keyword">
-		<button class="searchButton" type="submit">搜天猫</button>
-		<div class="searchBelow">
-			<c:forEach items="${cs}" var="c" varStatus="st">
-				<c:if test="${st.count>=8 and st.count<=11}">
-					<span>
-						<a href="forecategory?cid=${c.id}">
-							${c.name}
-						</a>
-						<c:if test="${st.count!=11}">				
-							<span>|</span>				
-						</c:if>
-					</span>			
-				</c:if>
-			</c:forEach>			
+	<form action="<%=request.getContextPath()%>/web/searchThing" method="post" >
+		<div class="searchDiv">
+			<input name="kw" type="text"  placeholder="男表 女表 眼镜" id="kw">
+			<button  type="submit" class="searchButton">搜索</button>
+			<div class="searchBelow">
+				<c:forEach items="${category}" var="c" varStatus="st">
+					<c:if test="${st.count>=3 and st.count<=6}">
+						<span>
+							<a href="forecategory?cid=${c.id}">
+									${c.name}
+							</a>
+							<c:if test="${st.count!=6}">
+								<span>|</span>
+							</c:if>
+						</span>
+					</c:if>
+				</c:forEach>
+			</div>
 		</div>
-	</div>
 	</form>
 	<div style="clear:both"></div>
 </div>

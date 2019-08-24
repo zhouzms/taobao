@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8" isELIgnored="false"%>
 
 
-<%@include file="modal.jsp" %>
-
 <div id="footer"  class="footer" style="display: block;">
 	
     <div id="footer_ensure" class="footer_ensure">

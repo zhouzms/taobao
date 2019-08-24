@@ -5,8 +5,8 @@
 
 <script>
 function showProductsAsideCategorys(cid){
-	$("div.eachCategory[cid="+cid+"]").css("background-color","white");
-	$("div.eachCategory[cid="+cid+"] a").css("color","#87CEFA");
+	$("div.eachCategory[cid="+cid+"]").css("background-color","red");
+	$("div.eachCategory[cid="+cid+"] a").css("color","white");
 	$("div.productsAsideCategorys[cid="+cid+"]").show();
 }
 
@@ -17,6 +17,7 @@ function hideProductsAsideCategorys(cid){
 	$("div.productsAsideCategorys[cid="+cid+"]").hide();
 }
 $(function(){
+	<!--左右链接的变色-->
     $("div.eachCategory").mouseenter(function(){
         var cid = $(this).attr("cid");
         showProductsAsideCategorys(cid);
@@ -33,7 +34,7 @@ $(function(){
     	var cid = $(this).attr("cid");
     	hideProductsAsideCategorys(cid);
     });
-	
+	<!--导航栏上的猫-->
 	$("div.rightMenu span").mouseenter(function(){
 		var left = $(this).position().left;
 		var top = $(this).position().top;
@@ -41,7 +42,7 @@ $(function(){
 		var destLeft = parseInt(left) + parseInt(width)/2;
 		$("img#catear").css("left",destLeft);
 		$("img#catear").css("top",top-20);
-		$("img#catear").fadeIn(500);
+		$("img#catear").fadeIn(200);
 				
 	});
 	$("div.rightMenu span").mouseleave(function(){
@@ -75,7 +76,7 @@ $(function(){
 		<span><a href=""><img src="<%=request.getContextPath()%>/img/site/guoji.png"/></a></span>
 		<c:forEach items="${category}" var="c" begin="1" end="4">
 				<span>
-				<a href="#">
+				<a href="<%=request.getContextPath()%>/web/productdetil?cid=${c.id}">
 					${c.name}
 				</a></span>
 		</c:forEach>
@@ -89,7 +90,7 @@ $(function(){
 </div>
 <!--旁边属性-->
 <div style="position: relative;left: 0;top: 0;">
-	<%--<%@include file="productsAsideCategorys.jsp" %>--%>
+	<%@include file="productsAsideCategorys.jsp" %>
 </div>
 
 

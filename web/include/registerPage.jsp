@@ -276,7 +276,7 @@ $(function(){
 					<!--各种注册方式-->
 					<!--手机号注册-->
 					<div style="margin-top: 15px;display: block; " id="div1" >
-						<form action="web/userServletRegister" method="post" id="regsubmit">
+						<form action="<%=request.getContextPath()%>/web/userServletRegister" method="post" id="regsubmit">
 							<input type="hidden"  name="code" id="code" /><!--隐藏-->
 							<!--手机号-->
 							<div class="input-group">
@@ -318,7 +318,7 @@ $(function(){
 					</div>
 					<!--邮箱注册-->
 					<div style="margin-top: 15px;display: none;" id="div2">
-						<form action="web/userservletqqregister" method="post" id="emailform">
+						<form action="<%=request.getContextPath()%>/web/userservletqqregister" method="post" id="emailform">
 							<p style="text-align: left;font-size: 14px;display: block;margin-bottom: 3px;margin-top: -5px;"><span style="color: red;">*</span>&nbsp;电子邮箱</p>
 					<div class="input-group">
 						<span class="input-group-addon">

@@ -55,7 +55,7 @@ $(function(){
 	<!--图片-->
 	<img id="loginBackgroundImg" class="loginBackgroundImg" src="<%=request.getContextPath()%>/img/site/loginBackground.png">
 	<!--登陆框-->
-	<form class="loginForm" action="web/WebUserServlet" method="post">
+	<form class="loginForm" action="<%=request.getContextPath()%>/web/WebUserServlet" method="post">
 		<div id="loginSmallDiv" class="loginSmallDiv"><!--白色边框-->
 			<div class="loginErrorMessageDiv">
 				<div class="alert alert-danger" >

@@ -14,4 +14,10 @@ public interface ProductService {
      * @return 某一类所有产品
      */
     List<Product> pros(int categoryId);
+
+    /**
+     * @param key 搜索框中关键字
+     * @return 需要的产品
+     */
+    List<Product> byKeyWordGetProduct(String key);
 }
