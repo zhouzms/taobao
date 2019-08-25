@@ -23,6 +23,14 @@ public class JspFilter implements Filter {
             httpServletResponse.sendRedirect("web/getproduct");
             return;
         }
+        if(url!=null && "cart.jsp".equals(s)){
+            httpServletResponse.sendRedirect("web/cookiegetcert");
+            return;
+        }
+        if(url!=null && "product.jsp".equals(s)){
+            httpServletResponse.sendRedirect("web/productdetil");
+            return;
+        }
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

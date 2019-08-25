@@ -1085,7 +1085,9 @@ button.addCartButton {
 	color: white;
 	font-family: arial;
 }
-
+button.addCartButton:hover{
+	background: darkred;
+}
 button.addCartButton span.glyphicon {
 	font-size: 12px;
 	margin-right: 8px;
@@ -2210,6 +2212,7 @@ div.registerSuccessDiv {
 	font-size: 16px;
 	color: #3C3C3C;
 	text-align: center;
+	line-height: 80px;
 }
 
 div.categoryPageDiv {

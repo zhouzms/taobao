@@ -20,4 +20,10 @@ public interface ProductService {
      * @return 需要的产品
      */
     List<Product> byKeyWordGetProduct(String key);
+
+    /**
+     * @param pid 产品id
+     * @return 某一个产品
+     */
+    Product byPidGetProduct(int pid);
 }

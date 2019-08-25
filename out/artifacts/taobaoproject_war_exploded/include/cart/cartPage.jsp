@@ -1,6 +1,3 @@
-<!-- 模仿天猫整站j2ee 教程 为how2j.cn 版权所有-->
-<!-- 本教程仅用于学习使用，切勿用于非法用途，由此引起一切后果与本站无关-->
-<!-- 供购买者学习，请勿私自传播，否则自行承担相关法律责任-->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
@@ -44,12 +41,12 @@ $(function(){
 	$("img.cartProductItemIfSelected").click(function(){
 		var selectit = $(this).attr("selectit")
 		if("selectit"==selectit){
-			$(this).attr("src","img/site/cartNotSelected.png");
+			$(this).attr("src","<%=request.getContextPath()%>/img/site/cartNotSelected.png");
 			$(this).attr("selectit","false")
 			$(this).parents("tr.cartProductItemTR").css("background-color","#fff");
 		}
 		else{
-			$(this).attr("src","img/site/cartSelected.png");
+			$(this).attr("src","<%=request.getContextPath()%>/img/site/cartSelected.png");
 			$(this).attr("selectit","selectit")
 			$(this).parents("tr.cartProductItemTR").css("background-color","#FFF8E1");
 		}
@@ -60,19 +57,19 @@ $(function(){
 	$("img.selectAllItem").click(function(){
 		var selectit = $(this).attr("selectit")
 		if("selectit"==selectit){
-			$("img.selectAllItem").attr("src","img/site/cartNotSelected.png");
+			$("img.selectAllItem").attr("src","<%=request.getContextPath()%>/img/site/cartNotSelected.png");
 			$("img.selectAllItem").attr("selectit","false")
 			$(".cartProductItemIfSelected").each(function(){
-				$(this).attr("src","img/site/cartNotSelected.png");
+				$(this).attr("src","<%=request.getContextPath()%>/img/site/cartNotSelected.png");
 				$(this).attr("selectit","false");
 				$(this).parents("tr.cartProductItemTR").css("background-color","#fff");
 			});			
 		}
 		else{
-			$("img.selectAllItem").attr("src","img/site/cartSelected.png");
+			$("img.selectAllItem").attr("src","<%=request.getContextPath()%>/img/site/cartSelected.png");
 			$("img.selectAllItem").attr("selectit","selectit")
 			$(".cartProductItemIfSelected").each(function(){
-				$(this).attr("src","img/site/cartSelected.png");
+				$(this).attr("src","<%=request.getContextPath()%>/img/site/cartSelected.png");
 				$(this).attr("selectit","selectit");
 				$(this).parents("tr.cartProductItemTR").css("background-color","#FFF8E1");
 			});				
@@ -167,9 +164,9 @@ function syncSelect(){
 	});
 	
 	if(selectAll)
-		$("img.selectAllItem").attr("src","img/site/cartSelected.png");
+		$("img.selectAllItem").attr("src","<%=request.getContextPath()%>/img/site/cartSelected.png");
 	else
-		$("img.selectAllItem").attr("src","img/site/cartNotSelected.png");
+		$("img.selectAllItem").attr("src","<%=request.getContextPath()%>/img/site/cartNotSelected.png");
 	
 	
 	
@@ -227,7 +224,7 @@ function syncPrice(pid,num,price){
 			<thead>
 				<tr>
 					<th class="selectAndImage">
-							<img selectit="false" class="selectAllItem" src="img/site/cartNotSelected.png">				
+							<img selectit="false" class="selectAllItem" src="<%=request.getContextPath()%>/img/site/cartNotSelected.png">
 					全选
 					
 					</th>
@@ -239,58 +236,68 @@ function syncPrice(pid,num,price){
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${ois }" var="oi">
-					<tr oiid="${oi.id}" class="cartProductItemTR">
+			<!--没有登录使用Cookie中的数据-->
+			<c:if test="${sessionScope.user==null}">
+                <c:if test="${certShop.cert!=null}">
+				<c:forEach items="${certShop.cert }" var="oi" varStatus="s">
+					<tr oiid="${s.index+1}" class="cartProductItemTR">
 						<td>
-							<img selectit="false" oiid="${oi.id}" class="cartProductItemIfSelected" src="img/site/cartNotSelected.png">
-							<a style="display:none" href="#nowhere"><img src="img/site/cartSelected.png"></a>
-							<img class="cartProductImg"  src="img/productSingle_middle/${oi.product.firstProductImage.id}.jpg">
+							<img selectit="false" oiid="${s.index+1}" class="cartProductItemIfSelected" src="<%=request.getContextPath()%>/img/site/cartNotSelected.png">
+							<a style="display:none" href="#nowhere"><img src="<%=request.getContextPath()%>/img/site/cartSelected.png"></a>
+							<img class="cartProductImg"  src="<%=request.getContextPath()%>/img/productSingle_middle/
+									<c:forEach items="${oi.key.images}" var="c" varStatus="i">
+										<c:if test="${i.index==0}">
+										${c.id}
+										</c:if>
+									</c:forEach>
+							.jpg">
 						</td>
 						<td>
 							<div class="cartProductLinkOutDiv">
-								<a href="foreproduct?pid=${oi.product.id}" class="cartProductLink">${oi.product.name}</a>
+								<a href="<%=request.getContextPath()%>/web/productdetil?pid=${oi.key.id}" class="cartProductLink">${oi.key.name}</a>
 								<div class="cartProductLinkInnerDiv">
-									<img src="img/site/creditcard.png" title="支持信用卡支付">
-									<img src="img/site/7day.png" title="消费者保障服务,承诺7天退货">
-									<img src="img/site/promise.png" title="消费者保障服务,承诺如实描述">
+									<img src="<%=request.getContextPath()%>/img/site/creditcard.png" title="支持信用卡支付">
+									<img src="<%=request.getContextPath()%>/img/site/7day.png" title="消费者保障服务,承诺7天退货">
+									<img src="<%=request.getContextPath()%>/img/site/promise.png" title="消费者保障服务,承诺如实描述">
 								</div>
 							</div>
 							
 						</td>
 						<td>
-							<span class="cartProductItemOringalPrice">￥${oi.product.orignalPrice}</span>
-							<span  class="cartProductItemPromotionPrice">￥${oi.product.promotePrice}</span>
+							<span class="cartProductItemOringalPrice">￥${oi.key.orignalPrice}</span>
+							<span  class="cartProductItemPromotionPrice">￥${oi.key.promotePrice}</span>
 							
 						</td>
 						<td>
 						
 							<div class="cartProductChangeNumberDiv">
-								<span class="hidden orderItemStock " pid="${oi.product.id}">${oi.product.stock}</span>
-								<span class="hidden orderItemPromotePrice " pid="${oi.product.id}">${oi.product.promotePrice}</span>
-								<a  pid="${oi.product.id}" class="numberMinus" href="#nowhere">-</a>
-								<input pid="${oi.product.id}" oiid="${oi.id}" class="orderItemNumberSetting" autocomplete="off" value="${oi.number}">
-								<a  stock="${oi.product.stock}" pid="${oi.product.id}" class="numberPlus" href="#nowhere">+</a>
+								<span class="hidden orderItemStock " pid="${oi.key.id}">${oi.key.stock}</span>
+								<span class="hidden orderItemPromotePrice " pid="${oi.key.id}">${oi.key.promotePrice}</span>
+								<a  pid="${oi.key.id}" class="numberMinus" href="#nowhere">-</a>
+								<input pid="${oi.key.id}" oiid="${s.index+1}" class="orderItemNumberSetting" autocomplete="off" value="${oi.value}">
+								<a  stock="${oi.key.stock}" pid="${oi.key.id}" class="numberPlus" href="#nowhere">+</a>
 							</div>					
 						
 						 </td>
 						<td >
-							<span class="cartProductItemSmallSumPrice" oiid="${oi.id}" pid="${oi.product.id}" >
-							￥<fmt:formatNumber type="number" value="${oi.product.promotePrice*oi.number}" minFractionDigits="2"/>
+							<span class="cartProductItemSmallSumPrice" oiid="${s.index+1}" pid="${oi.key.id}" >
+							￥<fmt:formatNumber type="number" value="${oi.key.promotePrice*oi.value}" minFractionDigits="2"/>
 							</span>
 						
 						</td>
 						<td>
-							<a class="deleteOrderItem" oiid="${oi.id}"  href="#nowhere">删除</a>
+							<a class="deleteOrderItem" oiid="${s.index+1}"  href="#nowhere">删除</a>
 						</td>
 					</tr>
-				</c:forEach>				
+				</c:forEach>
+			</c:if>
+            </c:if>
 			</tbody>
-		
 		</table>
 	</div>
 	
 	<div class="cartFoot">
-		<img selectit="false" class="selectAllItem" src="img/site/cartNotSelected.png">
+		<img selectit="false" class="selectAllItem" src="<%=request.getContextPath()%>/img/site/cartNotSelected.png">
 		<span>全选</span>
 <!-- 		<a href="#">删除</a> -->
 		

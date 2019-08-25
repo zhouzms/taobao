@@ -15,7 +15,7 @@ $(function(){
 		<c:forEach items="${c.arrproduct}" var="p" >
 			<div class="row">
 					<c:if test="${!empty p.subTitle}">
-						<a href="foreproduct?pid=${p.id}">
+						<a href="<%=request.getContextPath()%>/web/productdetil?pid=${p.id}">
 							<c:forEach items="${fn:split(p.subTitle, ' ')}" var="title" varStatus="st">
 									${title}
 							</c:forEach>

@@ -38,8 +38,11 @@ public class UserServiceImpl implements UserService {
                         return false;
                     }else {
                     //已经指向了第一条记录
+                        user.setId_l(query.getInt("id_l"));
                     user.setUsername_l(query.getString("username_l"));
                     user.setPassword_l(query.getString("password_l"));
+                    user.setPhone_l(query.getString("phone_l"));
+                    user.setEmail_l(query.getString("email_l"));
                     aJaxResult.setFlag(true);
                     aJaxResult.setMsg("登陆成功");
                     return true;

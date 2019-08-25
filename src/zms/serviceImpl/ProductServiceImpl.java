@@ -1,6 +1,5 @@
 package zms.serviceImpl;
 
-import tmall.dao.ProductDAO;
 import zms.dao.LoginDao;
 import zms.daoImpl.LoginDaoImpl;
 import zms.pojo.Product;
@@ -85,5 +84,42 @@ public class ProductServiceImpl implements ProductService {
             e.printStackTrace();
         }
         return productsArr;
+    }
+
+    @Override
+    public Product byPidGetProduct(int pid) {
+        String sql="select * from product where id=? ";
+        ResultSet query = productDao.query(sql, pid);
+        ProductImageService productImageService=new ProductImageServiceImpl();
+        ReviewServiceImpl reviewService=new ReviewServiceImpl();
+        Product p=new Product();
+        try{
+            while(query.next()){
+                p.setId(query.getInt("id"));
+                p.setName(query.getString("name"));
+                p.setSubTitle(query.getString("subTitle"));
+                p.setOrignalPrice(query.getFloat("orignalPrice"));
+                p.setPromotePrice(query.getFloat("promotePrice"));
+                p.setStock(query.getInt("stock"));
+                p.setCid(query.getInt("cid"));
+                p.setCreateDate(query.getString("createDate"));
+                /**
+                 * 封装图片
+                 */
+                List<ProductImage> iamges = productImageService.getIamges(p.getId());
+                p.setImages(iamges);
+                /**
+                 * 封装评论
+                 */
+                List<Review> reviews = reviewService.getReviews(p.getId());
+                p.setReviews(reviews);
+                /**
+                 * 添加所有关键字中的产品
+                 */
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return p;
     }
 }

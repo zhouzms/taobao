@@ -78,7 +78,7 @@ $(function(){
 				</span>
 				<input id="password" name="password" type="password" placeholder="密码" type="text">
 			</div>
-			<input type="checkbox" name="checkflag">&nbsp;&nbsp;&nbsp;
+			<input type="checkbox" name="checkflag" checked>&nbsp;&nbsp;&nbsp;
 			<b style="color: black;font-size: 14px;display: inline-block;position: relative;top: -3.4px;">记住帐号 (公共电脑不建议使用)</b><br><br>
 			<div>
 				<!--暂时不做-->

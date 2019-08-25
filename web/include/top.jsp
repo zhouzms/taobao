@@ -1,5 +1,6 @@
+<%@ page import="zms.util.CertShop" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" isELIgnored="false"%>
+		 pageEncoding="UTF-8" isELIgnored="false"%>
 
 <nav class="top">
 		<a href="<%=request.getContextPath()%>/home.jsp">
@@ -20,18 +21,18 @@
 
 
 		<span class="pull-right">
-			<c:if test="${ sessionScope.user!=null}">
 				<a href="<%=request.getContextPath()%>/forebought">我的订单</a>
-				<a href="<%=request.getContextPath()%>/forecart">
+				<a href="<%=request.getContextPath()%>/cart.jsp">
 			<span style="color:#C40000;margin:0px" class=" glyphicon glyphicon-shopping-cart redColor"></span>
-			购物车  <strong style="color: blue">10</strong>件</a>
-			</c:if>
-	<c:if test="${ sessionScope.user==null}">
-			<a href="<%=request.getContextPath()%>/login.jsp">我的订单</a>
-			<a href="<%=request.getContextPath()%>/login.jsp">
-				<i class="glyphicon glyphicon-shopping-cart" style="color: red;margin-left: 10px;"></i>&nbsp;&nbsp;我的购物车
-			</a>
-	</c:if>
+			购物车  <strong style="color: blue">
+						<c:if test="${certShop!=null}">
+							<% CertShop certShop=(CertShop) request.getAttribute("certShop");%>
+							<%=certShop.getSize()%>
+						</c:if>
+						<c:if test="${certShop==null}">
+							0
+						</c:if>
+				</strong>件</a>
 		</span>
 </nav>
 

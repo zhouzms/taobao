@@ -5,7 +5,7 @@
 		<c:forEach items="${category}" var="c">
 			<div cid="${c.id}" class="eachCategory">
 				<span class="glyphicon glyphicon-link"></span>
-				<a href="#">
+				<a href="<%=request.getContextPath()%>/web/productdetil?cid=${c.id}">
 					${c.name}
 				</a>
 			</div>

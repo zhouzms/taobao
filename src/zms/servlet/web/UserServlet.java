@@ -53,10 +53,10 @@ public class UserServlet extends javax.servlet.http.HttpServlet {
         //判断帐号是否正确
         if(loginFlag){
             //帐号密码正确:将帐号保存在session
-            HttpSession httpSession=request.getSession(true);
+            HttpSession httpSession=request.getSession();
             httpSession.setAttribute("user",user);
             //页面跳转->重定向
-            response.sendRedirect("../home.jsp");
+            response.sendRedirect(request.getContextPath()+"/home.jsp");
         }else {
             request.setAttribute("msg",aJaxResult);
             request.getRequestDispatcher("/login.jsp").forward(request,response);

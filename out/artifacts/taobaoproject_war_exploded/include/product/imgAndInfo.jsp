@@ -5,7 +5,7 @@
 <script>
  
 $(function(){
-    var stock = ${p.stock};
+    /*var stock = ;
     $(".productNumberSetting").keyup(function(){
         var num= $(".productNumberSetting").val();
         num = parseInt(num);
@@ -17,7 +17,7 @@ $(function(){
             num = stock;
         $(".productNumberSetting").val(num);
     });
-     
+
     $(".increaseNumber").click(function(){
         var num= $(".productNumberSetting").val();
         num++;
@@ -32,7 +32,7 @@ $(function(){
             num=1;
         $(".productNumberSetting").val(num);
     });
-     
+
     $(".addCartButton").removeAttr("disabled");
     $(".addCartLink").click(function(){
         var page = "forecheckLogin";
@@ -40,7 +40,7 @@ $(function(){
                 page,
                 function(result){
                     if("success"==result){
-                        var pid = ${p.id};
+                        var pid =
                         var num= $(".productNumberSetting").val();
                         var addCartpage = "foreaddCart";
                         $.get(
@@ -53,19 +53,19 @@ $(function(){
                                         $(".addCartButton").css("background-color","lightgray")
                                         $(".addCartButton").css("border-color","lightgray")
                                         $(".addCartButton").css("color","black")
-                                         
+
                                     }
                                     else{
-                                         
+
                                     }
                                 }
-                        );                          
+                        );
                     }
                     else{
-                        $("#loginModal").modal('show');                     
+                        $("#loginModal").modal('show');
                     }
                 }
-        );      
+        );
         return false;
     });
     $(".buyLink").click(function(){
@@ -78,23 +78,23 @@ $(function(){
                         location.href= $(".buyLink").attr("href")+"&num="+num;
                     }
                     else{
-                        $("#loginModal").modal('show');                     
+                        $("#loginModal").modal('show');
                     }
                 }
-        );      
+        );
         return false;
     });
-     
+
     $("button.loginSubmitButton").click(function(){
         var name = $("#name").val();
         var password = $("#password").val();
-         
+
         if(0==name.length||0==password.length){
             $("span.errorMessage").html("请输入账号密码");
-            $("div.loginErrorMessageDiv").show();           
+            $("div.loginErrorMessageDiv").show();
             return false;
         }
-         
+
         var page = "foreloginAjax";
         $.get(
                 page,
@@ -105,32 +105,71 @@ $(function(){
                     }
                     else{
                         $("span.errorMessage").html("账号密码错误");
-                        $("div.loginErrorMessageDiv").show();                       
+                        $("div.loginErrorMessageDiv").show();
                     }
                 }
-        );          
-         
+        );
+
         return true;
     });
-     
+
     $("img.smallImage").mouseenter(function(){
         var bigImageURL = $(this).attr("bigImageURL");
         $("img.bigImg").attr("src",bigImageURL);
     });
-     
+
     $("img.bigImg").load(
         function(){
             $("img.smallImage").each(function(){
                 var bigImageURL = $(this).attr("bigImageURL");
                 img = new Image();
                 img.src = bigImageURL;
-                 
+
                 img.onload = function(){
                     $("div.img4load").append($(img));
                 };
-            });     
+            });
         }
-    );
+    );*/
+    //判断是否登录
+    $("#btnsubmit").click(function () {
+       var idL="${sessionScope.user.id_l}";
+        var pronum=$("#pronum").val();
+       if(idL.length<=0){
+          //没有用户登录
+           //异步获取结果
+           $.ajax( {
+               url:"nousershoppingcret",
+               type:"post",
+               dataType:"json",
+               data:{
+                   pid:${product.id},
+                   pronum:pronum
+               },
+               success: function (data) {
+                   if(data.flag){
+                       alert("加入购物车成功");
+                   }
+               }
+           });
+       }else {
+           $.ajax( {
+               url:"shoppingGetProduct",
+               type:"post",
+               dataType:"json",
+               data:{
+                   pid:${product.id},
+                   pronum:pronum,
+                   uid:idL
+               },
+               success: function (data) {
+                   if(data.flag){
+                       alert("加入购物车成功");
+                   }
+               }
+           });
+       }
+    });
 });
  
 </script>
@@ -138,7 +177,13 @@ $(function(){
 <div class="imgAndInfo">
  
     <div class="imgInimgAndInfo">
-        <img src="<%=request.getContextPath()%>/img/productSingle/${p.firstProductImage.id}.jpg" class="bigImg">
+        <img src="<%=request.getContextPath()%>/img/productSingle/
+        <c:forEach items="${product.images}" var="c" varStatus="i">
+										<c:if test="${i.index==0}">
+										${c.id}
+										</c:if>
+									</c:forEach>
+        .jpg" class="bigImg">
         <div class="smallImageDiv">
             <c:forEach items="${p.productSingleImages}" var="pi">
                 <img src="<%=request.getContextPath()%>/img/productSingle_small/${pi.id}.jpg" bigImageURL="<%=request.getContextPath()%>/img/productSingle/${pi.id}.jpg" class="smallImage">
@@ -150,10 +195,10 @@ $(function(){
     <div class="infoInimgAndInfo">
          
         <div class="productTitle">
-            ${p.name}
+            ${product.name}
         </div>
         <div class="productSubTitle">
-            ${p.subTitle} 
+            ${product.subTitle}
         </div>
          
         <div class="productPrice">
@@ -171,27 +216,33 @@ $(function(){
                     <span class="originalPriceYuan">¥</span>
                     <span class="originalPrice">
                      
-                        <fmt:formatNumber type="number" value="${p.orignalPrice}" minFractionDigits="2"/>                 
+                        <fmt:formatNumber type="number" value="${product.orignalPrice}" minFractionDigits="2"/>
                     </span>
                 </div>
                 <div class="promotionDiv">
                     <span class="promotionPriceDesc">促销价 </span>
                     <span class="promotionPriceYuan">¥</span>
                     <span class="promotionPrice">
-                        <fmt:formatNumber type="number" value="${p.promotePrice}" minFractionDigits="2"/>
+                        <fmt:formatNumber type="number" value="${product.promotePrice}" minFractionDigits="2"/>
                     </span>               
                 </div>
             </div>
         </div>
         <div class="productSaleAndReviewNumber">
-            <div>销量 <span class="redColor boldWord"> ${p.saleCount }</span></div>   
-            <div>累计评价 <span class="redColor boldWord"> ${p.reviewCount}</span></div>    
+            <%--<div>销量 <span class="redColor boldWord"> ${p.saleCount }</span></div>--%>
+            <div>累计评价 <span class="redColor boldWord">
+                <% int i=0;%>
+						<c:forEach items="${p.reviews}" varStatus="s">
+                            <%i++;%>
+                        </c:forEach>
+					<%=i%>
+            </span></div>
         </div>
         <div class="productNumber">
             <span>数量</span>
             <span>
                 <span class="productNumberSettingSpan">
-                <input class="productNumberSetting" type="text" value="1">
+                <input class="productNumberSetting" type="text" value="1" id="pronum">
                 </span>
                 <span class="arrow">
                     <a href="#nowhere" class="increaseNumber">
@@ -199,7 +250,6 @@ $(function(){
                             <img src="<%=request.getContextPath()%>/img/site/increase.png">
                     </span>
                     </a>
-                     
                     <span class="updownMiddle"> </span>
                     <a href="#nowhere"  class="decreaseNumber">
                     <span class="updown">
@@ -210,7 +260,7 @@ $(function(){
                 </span>
                      
             件</span>
-            <span>库存${p.stock}件</span>
+            <span>库存${product.stock}件</span>
         </div>
         <div class="serviceCommitment">
             <span class="serviceCommitmentDesc">服务承诺</span>
@@ -224,7 +274,7 @@ $(function(){
          
         <div class="buyDiv">
             <a class="buyLink" href="forebuyone?pid=${p.id}"><button class="buyButton">立即购买</button></a>
-            <a href="#nowhere" class="addCartLink"><button class="addCartButton"><span class="glyphicon glyphicon-shopping-cart"></span>加入购物车</button></a>
+            <button class="addCartButton" id="btnsubmit"><span class="glyphicon glyphicon-shopping-cart"></span>加入购物车</button>
         </div>
     </div>
      
