@@ -1,5 +1,6 @@
 package zms.servlet.web;
 
+import zms.pojo.Product;
 import zms.pojo.User;
 import zms.service.ProductService;
 import zms.serviceImpl.ProductServiceImpl;
@@ -10,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author 19448
@@ -42,17 +45,28 @@ public class ShoppingGetProduct extends HttpServlet {
                 }
             }
         }
-        if(value!=null){
+        ProductService service = new ProductServiceImpl();
+        CertShop certShop = new CertShop();
+        //创建入库时间
+        Date date=new Date();
+        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String time = dateFormat.format(date);
+        int i=1;
+        //遍历cookie中的购物车
+        if(value!=null&&i>0){
+            i--;
             //有cookie
             String[] split = value.split("#");
             for(String s:split){
                 //产品id分离出来了
                 String[] split1 = s.split("-");
-                for(String sg:split1){
-
-                }
+                Product product = service.byPidGetProduct(Integer.parseInt(split1[0]));
+                certShop.addProduct(product, Integer.parseInt(split1[1]));
             }
         }
+        //传过来的值放入购物车中
+        Product product = service.byPidGetProduct(Integer.parseInt(pid));
+        certShop.addProduct(product,Integer.parseInt(pronum));
     }
 
     @Override
