@@ -24,7 +24,12 @@ public class JspFilter implements Filter {
             return;
         }
         if(url!=null && "cart.jsp".equals(s)){
-            httpServletResponse.sendRedirect("web/cookiegetcert");
+            Object user = httpServletRequest.getSession().getAttribute("user");
+            if(user!=null){
+                httpServletResponse.sendRedirect("web/shoppingGetProduct");
+            }else {
+                httpServletResponse.sendRedirect("web/cookiegetcert");
+            }
             return;
         }
         if(url!=null && "product.jsp".equals(s)){

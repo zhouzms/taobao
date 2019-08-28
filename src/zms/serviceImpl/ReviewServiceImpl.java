@@ -4,6 +4,7 @@ import zms.dao.LoginDao;
 import zms.daoImpl.LoginDaoImpl;
 import zms.pojo.Review;
 import zms.service.ReviewService;
+import zms.util.JDBCUtil;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class ReviewServiceImpl implements ReviewService {
         }catch (Exception e){
             e.printStackTrace();
         }
+        JDBCUtil.getclose();
         return reviews;
     }
 }

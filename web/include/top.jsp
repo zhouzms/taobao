@@ -24,15 +24,7 @@
 				<a href="<%=request.getContextPath()%>/forebought">我的订单</a>
 				<a href="<%=request.getContextPath()%>/cart.jsp">
 			<span style="color:#C40000;margin:0px" class=" glyphicon glyphicon-shopping-cart redColor"></span>
-			购物车  <strong style="color: blue">
-						<c:if test="${certShop!=null}">
-							<% CertShop certShop=(CertShop) request.getAttribute("certShop");%>
-							<%=certShop.getSize()%>
-						</c:if>
-						<c:if test="${certShop==null}">
-							0
-						</c:if>
-				</strong>件</a>
+			我的购物车  </a>
 		</span>
 </nav>
 

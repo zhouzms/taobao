@@ -36,6 +36,7 @@ public  class LoginDaoImpl<T> implements LoginDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        JDBCUtil.getclose();
         return true;
     }
     @Override
@@ -45,7 +46,7 @@ public  class LoginDaoImpl<T> implements LoginDao {
         try {
             resultSet = pst.executeQuery();
         } catch (SQLException e) {
-            e.printStackTrace();
+
         }
         return resultSet;
     }

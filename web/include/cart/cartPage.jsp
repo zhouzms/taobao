@@ -238,8 +238,7 @@ function syncPrice(pid,num,price){
 			<tbody>
 			<!--没有登录使用Cookie中的数据-->
 			<c:if test="${sessionScope.user==null}">
-                <c:if test="${certShop.cert!=null}">
-				<c:forEach items="${certShop.cert }" var="oi" varStatus="s">
+				<c:forEach items="${certShop.cert}" var="oi" varStatus="s">
 					<tr oiid="${s.index+1}" class="cartProductItemTR">
 						<td>
 							<img selectit="false" oiid="${s.index+1}" class="cartProductItemIfSelected" src="<%=request.getContextPath()%>/img/site/cartNotSelected.png">
@@ -261,29 +260,29 @@ function syncPrice(pid,num,price){
 									<img src="<%=request.getContextPath()%>/img/site/promise.png" title="消费者保障服务,承诺如实描述">
 								</div>
 							</div>
-							
+
 						</td>
 						<td>
 							<span class="cartProductItemOringalPrice">￥${oi.key.orignalPrice}</span>
 							<span  class="cartProductItemPromotionPrice">￥${oi.key.promotePrice}</span>
-							
+
 						</td>
 						<td>
-						
+
 							<div class="cartProductChangeNumberDiv">
 								<span class="hidden orderItemStock " pid="${oi.key.id}">${oi.key.stock}</span>
 								<span class="hidden orderItemPromotePrice " pid="${oi.key.id}">${oi.key.promotePrice}</span>
 								<a  pid="${oi.key.id}" class="numberMinus" href="#nowhere">-</a>
 								<input pid="${oi.key.id}" oiid="${s.index+1}" class="orderItemNumberSetting" autocomplete="off" value="${oi.value}">
 								<a  stock="${oi.key.stock}" pid="${oi.key.id}" class="numberPlus" href="#nowhere">+</a>
-							</div>					
-						
-						 </td>
+							</div>
+
+						</td>
 						<td >
 							<span class="cartProductItemSmallSumPrice" oiid="${s.index+1}" pid="${oi.key.id}" >
 							￥<fmt:formatNumber type="number" value="${oi.key.promotePrice*oi.value}" minFractionDigits="2"/>
 							</span>
-						
+
 						</td>
 						<td>
 							<a class="deleteOrderItem" oiid="${s.index+1}"  href="#nowhere">删除</a>
@@ -291,7 +290,59 @@ function syncPrice(pid,num,price){
 					</tr>
 				</c:forEach>
 			</c:if>
-            </c:if>
+			<c:if test="${sessionScope.user!=null}">
+				<c:forEach items="${cert.cert}" var="oi" varStatus="s">
+					<tr oiid="${s.index+1}" class="cartProductItemTR">
+						<td>
+							<img selectit="false" oiid="${s.index+1}" class="cartProductItemIfSelected" src="<%=request.getContextPath()%>/img/site/cartNotSelected.png">
+							<a style="display:none" href="#nowhere"><img src="<%=request.getContextPath()%>/img/site/cartSelected.png"></a>
+							<img class="cartProductImg"  src="<%=request.getContextPath()%>/img/productSingle_middle/
+									<c:forEach items="${oi.key.images}" var="c" varStatus="i">
+										<c:if test="${i.index==0}">
+										${c.id}
+										</c:if>
+									</c:forEach>
+							.jpg">
+						</td>
+						<td>
+							<div class="cartProductLinkOutDiv">
+								<a href="<%=request.getContextPath()%>/web/productdetil?pid=${oi.key.id}" class="cartProductLink">${oi.key.name}</a>
+								<div class="cartProductLinkInnerDiv">
+									<img src="<%=request.getContextPath()%>/img/site/creditcard.png" title="支持信用卡支付">
+									<img src="<%=request.getContextPath()%>/img/site/7day.png" title="消费者保障服务,承诺7天退货">
+									<img src="<%=request.getContextPath()%>/img/site/promise.png" title="消费者保障服务,承诺如实描述">
+								</div>
+							</div>
+
+						</td>
+						<td>
+							<span class="cartProductItemOringalPrice">￥${oi.key.orignalPrice}</span>
+							<span  class="cartProductItemPromotionPrice">￥${oi.key.promotePrice}</span>
+
+						</td>
+						<td>
+
+							<div class="cartProductChangeNumberDiv">
+								<span class="hidden orderItemStock " pid="${oi.key.id}">${oi.key.stock}</span>
+								<span class="hidden orderItemPromotePrice " pid="${oi.key.id}">${oi.key.promotePrice}</span>
+								<a  pid="${oi.key.id}" class="numberMinus" href="#nowhere">-</a>
+								<input pid="${oi.key.id}" oiid="${s.index+1}" class="orderItemNumberSetting" autocomplete="off" value="${oi.value}">
+								<a  stock="${oi.key.stock}" pid="${oi.key.id}" class="numberPlus" href="#nowhere">+</a>
+							</div>
+
+						</td>
+						<td >
+							<span class="cartProductItemSmallSumPrice" oiid="${s.index+1}" pid="${oi.key.id}" >
+							￥<fmt:formatNumber type="number" value="${oi.key.promotePrice*oi.value}" minFractionDigits="2"/>
+							</span>
+
+						</td>
+						<td>
+							<a class="deleteOrderItem" oiid="${s.index+1}"  href="#nowhere">删除</a>
+						</td>
+					</tr>
+				</c:forEach>
+			</c:if>
 			</tbody>
 		</table>
 	</div>

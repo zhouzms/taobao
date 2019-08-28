@@ -4,6 +4,7 @@ import zms.daoImpl.LoginDaoImpl;
 import zms.pojo.User;
 import zms.service.UserService;
 import zms.util.AJaxResult;
+import zms.util.JDBCUtil;
 import zms.util.ResultException;
 
 import java.sql.ResultSet;
@@ -51,6 +52,7 @@ public class UserServiceImpl implements UserService {
                 e.printStackTrace();
             }
         }
+        JDBCUtil.getclose();
         return true;
     }
 

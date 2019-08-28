@@ -7,6 +7,7 @@ import zms.pojo.ProductImage;
 import zms.pojo.Review;
 import zms.service.ProductImageService;
 import zms.service.ProductService;
+import zms.util.JDBCUtil;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class ProductServiceImpl implements ProductService {
        }catch(Exception e){
            e.printStackTrace();
        }
+        JDBCUtil.getclose();
         return productsArr;
     }
 
@@ -120,6 +122,7 @@ public class ProductServiceImpl implements ProductService {
         }catch (Exception e){
             e.printStackTrace();
         }
+        JDBCUtil.getclose();
         return p;
     }
 }

@@ -4,6 +4,7 @@ import zms.dao.LoginDao;
 import zms.daoImpl.LoginDaoImpl;
 import zms.pojo.ProductImage;
 import zms.service.ProductImageService;
+import zms.util.JDBCUtil;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class ProductImageServiceImpl implements ProductImageService {
         }catch (Exception e){
             e.printStackTrace();
         }
+        JDBCUtil.getclose();
         return productImageArrayList;
     }
 }

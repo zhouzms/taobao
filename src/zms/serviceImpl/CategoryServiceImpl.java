@@ -4,6 +4,7 @@ import zms.dao.LoginDao;
 import zms.daoImpl.LoginDaoImpl;
 import zms.pojo.Category;
 import zms.service.CategoryService;
+import zms.util.JDBCUtil;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class CategoryServiceImpl implements CategoryService {
         }catch(Exception e){
             e.printStackTrace();
         }
+        JDBCUtil.getclose();
         return categories;
     }
 
@@ -51,6 +53,7 @@ public class CategoryServiceImpl implements CategoryService {
         }catch (Exception e){
             e.printStackTrace();
         }
+        JDBCUtil.getclose();
         return category;
     }
 }
